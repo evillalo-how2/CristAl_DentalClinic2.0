@@ -16,12 +16,6 @@ function App() {
         <h1>Atoms test</h1>
 
         <div style={{ marginTop: 16 }}>
-          <Button onClick={() => setCount((c) => c + 1)} aria-label="Increase counter">
-            Clicks: {count}
-          </Button>
-        </div>
-
-        <div style={{ marginTop: 16 }}>
           <Input
             id="name"
             label="Name"
@@ -35,7 +29,7 @@ function App() {
         <div style={{ marginTop: 16 }}>
           <Select
             id="service"
-            label="Service"
+            label="Servicio"
             value={service}
             onChange={(e) => setService(e.target.value)}
             aria-label="Service select"
