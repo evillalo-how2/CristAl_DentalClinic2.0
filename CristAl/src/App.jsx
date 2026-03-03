@@ -1,33 +1,57 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Button from './Components/atoms/Button' 
+import Input from './Components/atoms/Input'
+import Select from './Components/atoms/Select'
+
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [name, setName] = useState("");
+  const [service, setService] = useState("");
+  const [count, setCount] = useState(0);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+        <div style={{ padding: 24 }}>
+        <h1>Atoms test</h1>
+
+        <div style={{ marginTop: 16 }}>
+          <Button onClick={() => setCount((c) => c + 1)} aria-label="Increase counter">
+            Clicks: {count}
+          </Button>
+        </div>
+
+        <div style={{ marginTop: 16 }}>
+          <Input
+            id="name"
+            label="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Write something"
+            aria-label="Name input"
+          />
+        </div>
+
+        <div style={{ marginTop: 16 }}>
+          <Select
+            id="service"
+            label="Service"
+            value={service}
+            onChange={(e) => setService(e.target.value)}
+            aria-label="Service select"
+          >
+            <option value="">Select an option</option>
+            <option value="valoracion">Valoración</option>
+            <option value="operatoria">Operatoria</option>
+            <option value="coronas">Coronas</option>
+          </Select>
+        </div>
+
+        <p style={{ marginTop: 16 }}>
+          Debug: <strong>{name || "(empty)"}</strong> /{" "}
+          <strong>{service || "(none)"}</strong>
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
