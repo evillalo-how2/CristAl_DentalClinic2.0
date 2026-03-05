@@ -19,10 +19,10 @@ export default function TreatmentCard({ name, short, duration, price, onAsk }) {
         </dl>
 
         <div className="mt-5 flex gap-3">
-          <Button onClick={onAsk} aria-label={`Ask about ${name}`}>
+          <Button onClick={() => onAsk("details")} aria-label={`Ask details about ${name}`}>
             Details
           </Button>
-          <Button variant="soft" onClick={onAsk} aria-label={`Ask risks about ${name}`}>
+          <Button variant="soft" onClick={() => onAsk("risks")} aria-label={`Ask risks about ${name}`}>
             Risks
           </Button>
         </div>

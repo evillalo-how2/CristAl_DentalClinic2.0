@@ -65,7 +65,7 @@ function App() {
               short="Aclarado dental con gel y luz UV."
               duration="60–90 min"
               price="$1,800–$3,500 MXN"
-              onAsk={() => setMsg("User clicked: Blanqueamiento")}
+              onAsk={(type) => setMsg(`User clicked: Blanqueamiento / ${type}`)}
             />
 
             <TreatmentCard
@@ -73,7 +73,7 @@ function App() {
               short="Recubrimiento total para proteger piezas debilitadas."
               duration="2 visits"
               price="$4,500–$12,000 MXN"
-              onAsk={() => setMsg("User clicked: Coronas")}
+              onAsk={(type) => setMsg(`User clicked: Coronas / ${type}`)}
             />
           </div>
         </div>
