@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import Button from './Components/atoms/Button' 
-import Input from './Components/atoms/Input'
-import Select from './Components/atoms/Select'
+import Button from './Components/atoms/Button'; 
+import Input from './Components/atoms/Input';
+import Select from './Components/atoms/Select';
 import SectionHeader from "./Components/molecule/SectionHeader";
 import TreatmentCard from "./Components/molecule/TreatmentCards";
-
-import './App.css'
+import { treatments} from "./data/procedures";
+import TreatmentGrid from "./Components/organisms/TreatmentGrid";
+import './App.css';
 
 function App() {
   const [name, setName] = useState("");
@@ -36,10 +37,12 @@ function App() {
             onChange={(e) => setService(e.target.value)}
             aria-label="Service select"
           >
-            <option value="">Select an option</option>
+            <option value="">Seleccione una opción</option>
             <option value="valoracion">Valoración</option>
             <option value="operatoria">Operatoria</option>
+            <option value="blanqueamiento">Blanqueamiento</option>
             <option value="coronas">Coronas</option>
+            <option value="exodoncias">Exodoncias</option>
           </Select>
         </div>
 
@@ -59,24 +62,11 @@ function App() {
             Debug message: <strong>{msg || "(none)"}</strong>
           </p>
 
-          <div className="mt-6 grid gap-5 sm:grid-cols-2">
-            <TreatmentCard
-              name="Blanqueamiento"
-              short="Aclarado dental con gel y luz UV."
-              duration="60–90 min"
-              price="$1,800–$3,500 MXN"
-              onAsk={(type) => setMsg(`User clicked: Blanqueamiento / ${type}`)}
-            />
-
-            <TreatmentCard
-              name="Coronas"
-              short="Recubrimiento total para proteger piezas debilitadas."
-              duration="2 visits"
-              price="$4,500–$12,000 MXN"
-              onAsk={(type) => setMsg(`User clicked: Coronas / ${type}`)}
-            />
+          <TreatmentGrid
+            items={treatments}
+            onAsk={(t, kind) => setMsg(`User clicked: ${t.name} (${kind})`)}
+          />
           </div>
-        </div>
       </main>
     </>
   )
