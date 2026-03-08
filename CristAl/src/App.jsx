@@ -1,93 +1,53 @@
 import { useState } from "react";
+import { treatments } from "./data/procedures";
 import Header from "./Components/organisms/Header";
+import Hero from "./Components/organisms/HeroSection";
+import WhyUs from "./Components/organisms/WhyUs";
+import Testimonials from "./Components/organisms/Testimonials";
+import AppointmentSection from "./Components/organisms/Appointment";
 import Input from "./Components/atoms/Input";
 import Select from "./Components/atoms/Select";
 import SectionHeader from "./Components/molecule/SectionHeader";
 import TreatmentGrid from "./Components/organisms/TreatmentGrid";
-import { treatments } from "./data/procedures";
-import Hero from "./Components/organisms/HeroSection";
+import Footer from "./Components/organisms/Footer";
 
 import './App.css';
 
 function App() {
-  const [name, setName] = useState("");
-  const [service, setService] = useState("");
   const [msg, setMsg] = useState("");
+
   return (
     <>
       <Header />
-        <div style={{ padding: 24 }}>
-        <h1>Atoms test</h1>
 
-        <div style={{ marginTop: 16 }}>
-          <Input
-            id="name"
-            label="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Write something"
-            aria-label="Name input"
-          />
-        </div>
+      <main id="contenido" className="min-h-dvh bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
         <Hero />
-        <div style={{ marginTop: 16 }}>
-          <Select
-            id="service"
-            label="Servicio"
-            value={service}
-            onChange={(e) => setService(e.target.value)}
-            aria-label="Service select"
-          >
-            <option value="">Seleccione una opción</option>
-            <option value="valoracion">Valoración</option>
-            <option value="operatoria">Operatoria</option>
-            <option value="blanqueamiento">Blanqueamiento</option>
-            <option value="coronas">Coronas</option>
-            <option value="exodoncias">Exodoncias</option>
-          </Select>
-        </div>
 
-        <p style={{ marginTop: 16 }}>
-          Debug: <strong>{name || "(empty)"}</strong> /{" "}
-          <strong>{service || "(none)"}</strong>
-        </p>
-      </div>
-            <main className="min-h-dvh bg-white p-6 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
-        <div className="mx-auto max-w-4xl">
-          <SectionHeader
-            title="Treatments"
-            subtitle="Test cards"
-          />
+        <section id="servicios" className="py-12" aria-labelledby="servicios_title">
+          <div className="mx-auto max-w-6xl px-5">
+            <SectionHeader
+              title="Servicios principales"
+              subtitle="Procedimientos comunes con enfoque preventivo. Priorizamos tu bienestar y tu salud a largo plazo."
+            />
 
-          <p className="mt-4 text-sm text-slate-600 dark:text-slate-300">
-            Debug message: <strong>{msg || "(none)"}</strong>
-          </p>
+            <p className="mt-4 text-sm text-slate-600 dark:text-slate-300">
+              Debug message: <strong>{msg || "(none)"}</strong>
+            </p>
 
-          <TreatmentGrid
-            items={treatments}
-            onAsk={(t, kind) => setMsg(`User clicked: ${t.name} (${kind})`)}
-          />
+            <TreatmentGrid
+              items={treatments}
+              onAsk={(t, kind) => setMsg(`User clicked: ${t.name} (${kind})`)}
+            />
           </div>
-                  <section id="por_que" className="mt-10" aria-label="Por qué elegirnos (placeholder)">
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950">
-              <h2 className="text-2xl font-bold tracking-tight">¿Por qué elegirnos?</h2>
-              <p className="mt-2 text-slate-600 dark:text-slate-300">
-                Work in progress for this section
-              </p>
-            </div>
-          </section>
+        </section>
 
-          <section id="cita" className="mt-10" aria-label="Cita (placeholder)">
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950">
-              <h2 className="text-2xl font-bold tracking-tight">Agenda tu cita</h2>
-              <p className="mt-2 text-slate-600 dark:text-slate-300">
-                Work in progress for this form.
-              </p>
-            </div>
-          </section>
+        <WhyChooseUs />
+        <Testimonials />
+        <AppointmentSection />
+        <Footer />
       </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
