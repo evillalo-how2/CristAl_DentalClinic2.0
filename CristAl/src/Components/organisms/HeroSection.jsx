@@ -17,7 +17,10 @@ export default function Hero() {
             Te explicamos opciones y costos con claridad desde un inicio.
           </p>
 
-          <ul className="mt-6 space-y-2 text-slate-700 dark:text-slate-200" aria-label="Beneficios principales">
+          <ul
+            className="mt-6 list-none space-y-2 p-0 text-slate-700 dark:text-slate-200"
+            aria-label="Beneficios principales"
+          >
             <li className="flex gap-3">
               <span className="mt-1 h-2.5 w-2.5 rounded-full bg-brand-600" aria-hidden="true" />
               Valoración y plan de tratamiento personalizado
@@ -34,14 +37,14 @@ export default function Hero() {
 
           <div className="mt-7 flex flex-wrap gap-3">
             <a
-              href="#cita"
+              href="#appointments"
               className="inline-flex items-center justify-center rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700 dark:bg-brand-500 dark:hover:bg-brand-600"
               aria-label="Agendar cita"
             >
               Agendar cita
             </a>
             <a
-              href="#servicios"
+              href="#services"
               className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:hover:bg-slate-900/60"
               aria-label="Ver servicios"
             >
