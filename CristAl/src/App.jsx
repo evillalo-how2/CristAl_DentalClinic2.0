@@ -28,11 +28,6 @@ function App() {
               title="Servicios principales"
               subtitle="Procedimientos comunes con enfoque preventivo. Priorizamos tu bienestar y tu salud a largo plazo."
             />
-
-            <p className="mt-4 text-sm text-slate-600 dark:text-slate-300">
-              Debug message: <strong>{msg || "(none)"}</strong>
-            </p>
-
             <TreatmentGrid
               items={treatments}
               onAsk={(t, kind) => setMsg(`User clicked: ${t.name} (${kind})`)}
