@@ -5,6 +5,7 @@ import Select from "./Components/atoms/Select";
 import SectionHeader from "./Components/molecule/SectionHeader";
 import TreatmentGrid from "./Components/organisms/TreatmentGrid";
 import { treatments } from "./data/procedures";
+import Hero from "./Components/organisms/HeroSection";
 
 import './App.css';
 
@@ -28,7 +29,7 @@ function App() {
             aria-label="Name input"
           />
         </div>
-
+        <Hero />
         <div style={{ marginTop: 16 }}>
           <Select
             id="service"
