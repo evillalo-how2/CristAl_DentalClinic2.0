@@ -1,20 +1,20 @@
-import { useState } from 'react'
-import Button from './Components/atoms/Button'; 
-import Input from './Components/atoms/Input';
-import Select from './Components/atoms/Select';
+import { useState } from "react";
+import Header from "./Components/organisms/Header";
+import Input from "./Components/atoms/Input";
+import Select from "./Components/atoms/Select";
 import SectionHeader from "./Components/molecule/SectionHeader";
-import TreatmentCard from "./Components/molecule/TreatmentCards";
-import { treatments} from "./data/procedures";
 import TreatmentGrid from "./Components/organisms/TreatmentGrid";
+import { treatments } from "./data/procedures";
+
 import './App.css';
 
 function App() {
   const [name, setName] = useState("");
   const [service, setService] = useState("");
-  const [count, setCount] = useState(0);
   const [msg, setMsg] = useState("");
   return (
     <>
+      <Header />
         <div style={{ padding: 24 }}>
         <h1>Atoms test</h1>
 
@@ -67,6 +67,23 @@ function App() {
             onAsk={(t, kind) => setMsg(`User clicked: ${t.name} (${kind})`)}
           />
           </div>
+                  <section id="por_que" className="mt-10" aria-label="Por qué elegirnos (placeholder)">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950">
+              <h2 className="text-2xl font-bold tracking-tight">¿Por qué elegirnos?</h2>
+              <p className="mt-2 text-slate-600 dark:text-slate-300">
+                Work in progress for this section
+              </p>
+            </div>
+          </section>
+
+          <section id="cita" className="mt-10" aria-label="Cita (placeholder)">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950">
+              <h2 className="text-2xl font-bold tracking-tight">Agenda tu cita</h2>
+              <p className="mt-2 text-slate-600 dark:text-slate-300">
+                Work in progress for this form.
+              </p>
+            </div>
+          </section>
       </main>
     </>
   )
