@@ -9,11 +9,11 @@ export default function TreatmentCard({ name, short, duration, price, onAsk }) {
 
         <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
           <div>
-            <dt className="text-slate-500 dark:text-slate-400">Duration</dt>
+            <dt className="text-slate-500 dark:text-slate-400">Duración</dt>
             <dd className="font-semibold">{duration}</dd>
           </div>
           <div>
-            <dt className="text-slate-500 dark:text-slate-400">Price</dt>
+            <dt className="text-slate-500 dark:text-slate-400">Precio</dt>
             <dd className="font-semibold">{price}</dd>
           </div>
         </dl>
