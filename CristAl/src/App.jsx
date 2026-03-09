@@ -8,9 +8,16 @@ import Appointment from "./Components/organisms/Appointment";
 import Footer from "./Components/organisms/Footer";
 import SectionHeader from "./Components/molecule/SectionHeader";
 import TreatmentGrid from "./Components/organisms/TreatmentGrid";
+import ChatbotWidget from "./Components/organisms/ChatbotWidget";
 
 function App() {
-  const [msg, setMsg] = useState("");
+  const [chatSeed, setChatSeed] = useState(null);
+  const [prefillServiceId, setPrefillServiceId] = useState("");
+
+  function handleSchedule(treatmentId) {
+    setPrefillServiceId(treatmentId || "");
+    document.getElementById("cita")?.scrollIntoView({ behavior: "smooth" });
+  }
 
   return (
     <>
@@ -28,18 +35,22 @@ function App() {
               title="Servicios principales"
               subtitle="Procedimientos comunes con enfoque preventivo. Priorizamos tu bienestar y tu salud a largo plazo."
             />
+
             <TreatmentGrid
               items={treatments}
-              onAsk={(t, kind) => setMsg(`User clicked: ${t.name} (${kind})`)}
+              onAsk={(t, kind) => setChatSeed({ treatmentId: t.id, topic: kind })}
             />
           </div>
         </section>
 
         <WhyUs />
         <Testimonials />
-        <Appointment />
+        <Appointment prefillServiceId={prefillServiceId} />
         <Footer />
+
+        
       </main>
+      <ChatbotWidget seed={chatSeed} onSchedule={handleSchedule} />
     </>
   );
 }

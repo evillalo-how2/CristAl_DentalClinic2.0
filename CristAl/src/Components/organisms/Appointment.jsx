@@ -1,17 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SectionHeader from "../molecule/SectionHeader";
 import Input from "../atoms/Input";
 import Select from "../atoms/Select";
 import Button from "../atoms/Button";
 
-export default function AppointmentSection() {
+export default function Appointment({ prefillServiceId = "" }) {
   const [form, setForm] = useState({
     name: "",
     phone: "",
     email: "",
     service: "",
-    message: "",
+    message: ""
   });
+
+  useEffect(() => {
+    if (!prefillServiceId) return;
+    setForm((prev) => ({ ...prev, service: prefillServiceId }));
+  }, [prefillServiceId]);
 
   function updateField(key, value) {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -108,9 +113,7 @@ export default function AppointmentSection() {
                 Enviar solicitud
               </Button>
               <p className="text-xs text-slate-600 dark:text-slate-300">
-                <strong>
-                  Al enviar, aceptas que te contactemos para confirmar disponibilidad.
-                </strong>
+                <strong>Al enviar, aceptas que te contactemos para confirmar disponibilidad.</strong>
               </p>
             </div>
           </fieldset>
