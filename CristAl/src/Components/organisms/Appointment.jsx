@@ -28,7 +28,7 @@ export default function Appointment({ prefillServiceId = "" }) {
   }
 
   return (
-    <section id="cita" className="py-12" aria-labelledby="cita_title">
+    <section id="appointments" className="py-12" aria-labelledby="cita_title">
       <div className="mx-auto max-w-6xl px-5">
         <SectionHeader
           title="Agenda tu cita"

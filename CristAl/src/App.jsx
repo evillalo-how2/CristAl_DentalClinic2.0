@@ -24,12 +24,12 @@ function App() {
       <Header />
 
       <main
-        id="contenido"
+        id="content"
         className="min-h-dvh bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100"
       >
         <HeroSection />
 
-        <section id="servicios" className="py-12" aria-labelledby="servicios_title">
+        <section id="services" className="py-12" aria-labelledby="servicios_title">
           <div className="mx-auto max-w-6xl px-5">
             <SectionHeader
               title="Servicios principales"

@@ -6,7 +6,7 @@ function buildReply(treatment, topic) {
         const name = treatment?.name ? ` (${treatment.name})` : "";
         return {
             text: `Esta función aun no ha sido implementada. Por ahora, puedes usar el formulario en la sección “Agenda tu cita”${name}.`,
-            cta: { label: "Ir al formulario", href: "#cita" }
+            cta: { label: "Ir al formulario", href: "#appointments" }
         };
     }
 
@@ -206,13 +206,13 @@ export default function ChatbotWidget({ seed, onSchedule }) {
                             className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
                         >
                             <div
-                                className={`max-w-[88%] rounded-3xl px-4 py-3 text-sm leading-relaxed shadow-sm ${m.role === "user" ? "bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900": "bg-white text-slate-900 dark:bg-slate-900/70 dark:text-slate-100"
+                                className={`max-w-[88%] rounded-3xl px-4 py-3 text-sm leading-relaxed shadow-sm ${m.role === "user" ? "bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900" : "bg-white text-slate-900 dark:bg-slate-900/70 dark:text-slate-100"
                                     }`}
                             >
                                 <div
                                     className={`mb-1 text-[11px] font-bold uppercase tracking-wide ${m.role === "user"
-                                            ? "text-white/80"
-                                            : "text-slate-500 dark:text-slate-400"
+                                        ? "text-white/80"
+                                        : "text-slate-500 dark:text-slate-400"
                                         }`}
                                 >
                                     {m.role === "user" ? "Tú" : "Bot"}
@@ -227,8 +227,13 @@ export default function ChatbotWidget({ seed, onSchedule }) {
                                         aria-label={m.cta.label}
                                         onClick={(e) => {
                                             e.preventDefault();
+
                                             handleSchedule(selectedTreatmentId);
-                                            document.getElementById("cita")?.scrollIntoView({ behavior: "smooth" });
+
+                                            const targetId = (m.cta.href || "").replace("#", "");
+                                            document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
+
+                                            window.location.hash = m.cta.href;
                                         }}
                                     >
                                         {m.cta.label}

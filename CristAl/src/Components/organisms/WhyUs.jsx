@@ -2,7 +2,7 @@ import SectionHeader from "../molecule/SectionHeader";
 
 export default function WhyUs() {
   return (
-    <section id="por_que" className="py-12" aria-labelledby="porque_title">
+    <section id="why_us" className="py-12" aria-labelledby="porque_title">
       <div className="mx-auto max-w-6xl px-5">
         <SectionHeader
           title="Por qué elegirnos"
