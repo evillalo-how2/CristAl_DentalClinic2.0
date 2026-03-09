@@ -9,7 +9,7 @@ export default function TreatmentCard({
   imageAlt,
   bullets = [],
   ctaText = "Agendar",
-  ctaHref = "#cita",
+  ctaHref = "#appointments",
   onAsk
 }) {
   return (

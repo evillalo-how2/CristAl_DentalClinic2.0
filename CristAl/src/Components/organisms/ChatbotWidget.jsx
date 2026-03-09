@@ -154,12 +154,11 @@ export default function ChatbotWidget({ seed, onSchedule }) {
   }
 
   return (
-    <div className="fixed bottom-5 right-5 left-auto z-[60]">
+    <div className="fixed bottom-6 right-6 left-auto z-[60]">
       <section
         role="dialog"
         aria-label="Chat de tratamientos"
-        className="w-[340px] sm:w-[380px] overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-950"
-      >
+className="w-[300px] sm:w-[320px] lg:w-[340px] overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-950"      >
         <header className="flex items-start justify-between gap-3 px-5 py-4">
           <div>
             <p className="text-sm font-extrabold text-slate-900 dark:text-slate-100">
