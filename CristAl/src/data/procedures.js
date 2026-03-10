@@ -35,6 +35,8 @@ export const treatments = [
       "Se coloca y modela la resina estética.",
       "Se ajusta la mordida y se pule para un acabado natural."
     ],
+    procedureGuideText: "¿Cómo se realiza el procedimiento?",
+    procedureGuideHref: "https://www.youtube.com/watch?v=ie4GQzqyW98",
     ctaText: "Agendar valoración",
     ctaHref: "#appointment"
   },
@@ -74,6 +76,8 @@ export const treatments = [
       "Se toman registros o escaneo para fabricar la pieza.",
       "Se coloca la corona final y se ajusta la mordida."
     ],
+    procedureGuideText: "¿Cómo se realiza el procedimiento?",
+    procedureGuideHref: "https://www.youtube.com/shorts/e-afGhDfGrU",
     ctaText: "Cotiza tu caso",
     ctaHref: "#appointment"
   },
@@ -113,6 +117,8 @@ export const treatments = [
       "Se aplica el protocolo de blanqueamiento indicado.",
       "Se comparten cuidados para mantener el resultado."
     ],
+    procedureGuideText: "¿Cómo se realiza el procedimiento?",
+    procedureGuideHref: "https://www.youtube.com/watch?v=YEwnJG2treI",
     ctaText: "Agendar sesión",
     ctaHref: "#appointment"
   },
@@ -152,6 +158,8 @@ export const treatments = [
       "Se aplica anestesia local y se realiza el procedimiento.",
       "Se explican cuidados de recuperación y señales de alerta."
     ],
+    procedureGuideText: "¿Cómo se realiza el procedimiento?",
+    procedureGuideHref: "https://www.youtube.com/watch?v=RIhr32Ko-uY",
     ctaText: "Consultar mi caso",
     ctaHref: "#appointment"
   },
@@ -191,6 +199,8 @@ export const treatments = [
       "Si es necesario, se sugieren estudios complementarios.",
       "Se entrega una propuesta inicial de tratamiento y costos."
     ],
+    procedureGuideText: "",
+    procedureGuideHref: "",
     ctaText: "Agendar cita",
     ctaHref: "#appointment"
   }
