@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SectionHeader from "../molecule/SectionHeader";
 import Input from "../atoms/Input";
 import Select from "../atoms/Select";
-import Button from "../atoms/Button";
 
 export default function Appointment({ prefillServiceId = "" }) {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
     name: "",
     phone: "",
     email: "",
     service: "",
-    message: ""
+    message: "",
   });
 
   useEffect(() => {
@@ -24,11 +26,16 @@ export default function Appointment({ prefillServiceId = "" }) {
 
   function onSubmit(e) {
     e.preventDefault();
-    alert("Solicitud enviada (demo). Más adelante lo conectamos al backend.");
+
+    navigate("/appointments/summary", {
+      state: {
+        appointment: form,
+      },
+    });
   }
 
   return (
-    <section id="appointments" className="py-12" aria-labelledby="cita_title">
+    <section id="appointments" className="py-12" aria-labelledby="appointment_title">
       <div className="mx-auto max-w-6xl px-5">
         <SectionHeader
           title="Agenda tu cita"
@@ -108,12 +115,19 @@ export default function Appointment({ prefillServiceId = "" }) {
               </div>
             </div>
 
-            <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-              <Button type="submit" aria-label="Enviar solicitud">
+            <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <button
+                type="submit"
+                className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white dark:focus:ring-slate-500 dark:focus:ring-offset-slate-950"
+                aria-label="Enviar solicitud"
+              >
                 Enviar solicitud
-              </Button>
+              </button>
+
               <p className="text-xs text-slate-600 dark:text-slate-300">
-                <strong>Al enviar, aceptas que te contactemos para confirmar disponibilidad.</strong>
+                <strong>
+                  Al enviar, aceptas que te contactemos para confirmar disponibilidad.
+                </strong>
               </p>
             </div>
           </fieldset>

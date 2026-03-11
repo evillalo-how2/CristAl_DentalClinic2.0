@@ -5,22 +5,30 @@ function buildReply(treatment, topic) {
   if (topic === "schedule") {
     const name = treatment?.name ? ` (${treatment.name})` : "";
     return {
-      text: `Esta función aun no ha sido implementada. Por ahora, puedes usar el formulario en la sección “Agenda tu cita”${name}.`,
-      cta: { label: "Ir al formulario", href: "#appointments" }
+      text: `Esta función aún no ha sido implementada. Por ahora, puedes usar el formulario en la sección “Agenda tu cita”${name}.`,
+      cta: { label: "Ir al formulario", href: "#appointments" },
     };
   }
 
-  if (!treatment) return { text: "Elige un tratamiento para comenzar.", cta: null };
+  if (!treatment) {
+    return { text: "Elige un tratamiento para comenzar.", cta: null };
+  }
 
   const lines = [];
 
   if (topic === "details") {
     lines.push(`${treatment.name}: ${treatment.short}`);
-    if (treatment.bullets?.length) lines.push(`Incluye: ${treatment.bullets.join(", ")}.`);
-    if (treatment.duration) lines.push(`Duración estimada: ${treatment.duration}.`);
+    if (treatment.bullets?.length) {
+      lines.push(`Incluye: ${treatment.bullets.join(", ")}.`);
+    }
+    if (treatment.duration) {
+      lines.push(`Duración estimada: ${treatment.duration}.`);
+    }
   }
 
-  if (topic === "price") lines.push(`Rango típico: ${treatment.price || "Depende del caso."}`);
+  if (topic === "price") {
+    lines.push(`Rango típico: ${treatment.price || "Depende del caso."}`);
+  }
 
   if (topic === "risks") {
     lines.push(
@@ -29,10 +37,15 @@ function buildReply(treatment, topic) {
   }
 
   if (topic === "aftercare") {
-    lines.push("Cuidados: dependen del procedimiento. En consulta se indican cuidados personalizados.");
+    lines.push(
+      "Cuidados: dependen del procedimiento. En consulta se indican cuidados personalizados."
+    );
   }
 
-  lines.push("Información general. La valoración clínica define el plan final y el costo exacto.");
+  lines.push(
+    "Información general. La valoración clínica define el plan final y el costo exacto."
+  );
+
   return { text: lines.join("\n"), cta: null };
 }
 
@@ -41,11 +54,15 @@ const topics = [
   { id: "risks", label: "Riesgos" },
   { id: "aftercare", label: "Cuidados" },
   { id: "price", label: "Precio" },
-  { id: "schedule", label: "Agendar cita" }
+  { id: "schedule", label: "Agendar cita" },
 ];
 
 const initialMessages = [
-  { role: "bot", text: "Selecciona un tratamiento y luego el tema que quieres conocer.", cta: null }
+  {
+    role: "bot",
+    text: "Selecciona un tratamiento y luego el tema que quieres conocer.",
+    cta: null,
+  },
 ];
 
 export default function ChatbotWidget({ seed, onSchedule }) {
@@ -63,7 +80,10 @@ export default function ChatbotWidget({ seed, onSchedule }) {
 
   useEffect(() => {
     if (minimized) return;
-    logRef.current?.scrollTo({ top: logRef.current.scrollHeight, behavior: "smooth" });
+    logRef.current?.scrollTo({
+      top: logRef.current.scrollHeight,
+      behavior: "smooth",
+    });
   }, [messages, minimized]);
 
   function clearChat() {
@@ -71,38 +91,46 @@ export default function ChatbotWidget({ seed, onSchedule }) {
   }
 
   function handleSchedule(treatmentId) {
-    if (typeof onSchedule === "function") onSchedule(treatmentId || "");
+    if (typeof onSchedule === "function") {
+      onSchedule(treatmentId || "");
+    }
   }
 
   useEffect(() => {
     if (!seed) return;
+
     const key = JSON.stringify(seed);
     if (lastSeedRef.current === key) return;
     lastSeedRef.current = key;
 
     setMinimized(false);
 
-    if (seed.treatmentId) setSelectedTreatmentId(seed.treatmentId);
+    if (seed.treatmentId) {
+      setSelectedTreatmentId(seed.treatmentId);
+    }
 
     if (seed.topic) {
-      const t = treatments.find((x) => x.id === seed.treatmentId) || null;
-      const reply = buildReply(t, seed.topic);
-      const topicLabel = topics.find((x) => x.id === seed.topic)?.label || seed.topic;
+      const treatment = treatments.find((item) => item.id === seed.treatmentId) || null;
+      const reply = buildReply(treatment, seed.topic);
+      const topicLabel =
+        topics.find((item) => item.id === seed.topic)?.label || seed.topic;
 
       const userLabel =
         seed.topic === "schedule"
           ? `Pregunta: ${topicLabel}`
-          : `Pregunta: ${t?.name || "Tratamiento"} · ${topicLabel}`;
+          : `Pregunta: ${treatment?.name || "Tratamiento"} · ${topicLabel}`;
 
       setMessages((prev) => [
         ...prev,
         { role: "user", text: userLabel, cta: null },
-        { role: "bot", text: reply.text, cta: reply.cta }
+        { role: "bot", text: reply.text, cta: reply.cta },
       ]);
 
       if (seed.topic === "schedule") {
         handleSchedule(seed.treatmentId || "");
-        document.getElementById("appointments")?.scrollIntoView({ behavior: "smooth" });
+        document
+          .getElementById("appointments")
+          ?.scrollIntoView({ behavior: "smooth" });
       }
     }
   }, [seed]);
@@ -111,12 +139,12 @@ export default function ChatbotWidget({ seed, onSchedule }) {
     if (topicId !== "schedule" && !selectedTreatment) {
       setMessages((prev) => [
         ...prev,
-        { role: "bot", text: "Primero elige un tratamiento.", cta: null }
+        { role: "bot", text: "Primero elige un tratamiento.", cta: null },
       ]);
       return;
     }
 
-    const topicLabel = topics.find((x) => x.id === topicId)?.label || topicId;
+    const topicLabel = topics.find((item) => item.id === topicId)?.label || topicId;
 
     const userLabel =
       topicId === "schedule"
@@ -128,22 +156,24 @@ export default function ChatbotWidget({ seed, onSchedule }) {
     setMessages((prev) => [
       ...prev,
       { role: "user", text: userLabel, cta: null },
-      { role: "bot", text: reply.text, cta: reply.cta }
+      { role: "bot", text: reply.text, cta: reply.cta },
     ]);
 
     if (topicId === "schedule") {
       handleSchedule(selectedTreatmentId);
-      document.getElementById("appointments")?.scrollIntoView({ behavior: "smooth" });
+      document
+        .getElementById("appointments")
+        ?.scrollIntoView({ behavior: "smooth" });
     }
   }
 
   if (minimized) {
     return (
-      <div className="fixed bottom-5 right-5 left-auto z-[60]">
+      <div className="fixed bottom-4 right-4 z-[60]">
         <button
           type="button"
           onClick={() => setMinimized(false)}
-          className="inline-flex items-center rounded-full bg-slate-900 px-4 py-3 text-sm font-semibold text-white shadow-2xl hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100"
+          className="inline-flex items-center rounded-full bg-slate-900 px-4 py-3 text-sm font-semibold text-white shadow-2xl transition hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100"
           aria-label="Abrir chat"
           aria-expanded="false"
         >
@@ -154,24 +184,27 @@ export default function ChatbotWidget({ seed, onSchedule }) {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 left-auto z-[60]">
+    <div className="fixed bottom-4 right-4 z-[60]">
       <section
         role="dialog"
         aria-label="Chat de tratamientos"
-className="w-[300px] sm:w-[320px] lg:w-[340px] overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-950"      >
-        <header className="flex items-start justify-between gap-3 px-5 py-4">
+        className="w-[280px] sm:w-[296px] lg:w-[308px] overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-950"
+      >
+        <header className="flex items-start justify-between gap-3 px-4 py-4">
           <div>
             <p className="text-sm font-extrabold text-slate-900 dark:text-slate-100">
               Asistente dental
             </p>
-            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">Respuestas guiadas</p>
+            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+              Respuestas guiadas
+            </p>
           </div>
 
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={clearChat}
-              className="rounded-2xl px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900/60"
+              className="rounded-2xl px-3 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900/60"
               aria-label="Limpiar chat"
             >
               Limpiar
@@ -180,7 +213,7 @@ className="w-[300px] sm:w-[320px] lg:w-[340px] overflow-hidden rounded-3xl borde
             <button
               type="button"
               onClick={() => setMinimized(true)}
-              className="rounded-2xl px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900/60"
+              className="rounded-2xl px-3 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900/60"
               aria-label="Minimizar chat"
             >
               Minimizar
@@ -188,7 +221,7 @@ className="w-[300px] sm:w-[320px] lg:w-[340px] overflow-hidden rounded-3xl borde
           </div>
         </header>
 
-        <div className="border-y border-slate-200 px-5 py-4 dark:border-slate-800">
+        <div className="border-y border-slate-200 px-4 py-4 dark:border-slate-800">
           <label className="text-sm font-semibold" htmlFor="chat-treatment">
             Tratamiento
           </label>
@@ -201,23 +234,23 @@ className="w-[300px] sm:w-[320px] lg:w-[340px] overflow-hidden rounded-3xl borde
             aria-label="Seleccionar tratamiento"
           >
             <option value="">Selecciona una opción</option>
-            {treatments.map((t) => (
-              <option key={t.id} value={t.id}>
-                {t.name}
+            {treatments.map((treatment) => (
+              <option key={treatment.id} value={treatment.id}>
+                {treatment.name}
               </option>
             ))}
           </select>
 
-          <div className="mt-4 flex flex-wrap gap-2.5">
-            {topics.map((t) => (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {topics.map((topic) => (
               <button
-                key={t.id}
+                key={topic.id}
                 type="button"
-                onClick={() => ask(t.id)}
-                className="rounded-full border border-slate-200 bg-slate-50 px-3.5 py-2 text-xs font-semibold text-slate-900 shadow-sm hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-900/40 dark:text-slate-100 dark:hover:bg-slate-900/70"
-                aria-label={t.label}
+                onClick={() => ask(topic.id)}
+                className="rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-[11px] font-semibold text-slate-900 shadow-sm transition hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-900/40 dark:text-slate-100 dark:hover:bg-slate-900/70"
+                aria-label={topic.label}
               >
-                {t.label}
+                {topic.label}
               </button>
             ))}
           </div>
@@ -228,44 +261,48 @@ className="w-[300px] sm:w-[320px] lg:w-[340px] overflow-hidden rounded-3xl borde
           role="log"
           aria-live="polite"
           aria-relevant="additions"
-          className="max-h-[320px] space-y-4 overflow-auto bg-slate-50 px-5 py-4 dark:bg-slate-950"
+          className="max-h-[260px] space-y-4 overflow-auto bg-slate-50 px-4 py-4 dark:bg-slate-950"
         >
-          {messages.map((m, idx) => (
+          {messages.map((message, index) => (
             <div
-              key={idx}
-              className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
+              key={index}
+              className={`flex ${
+                message.role === "user" ? "justify-end" : "justify-start"
+              }`}
             >
               <div
                 className={`max-w-[88%] rounded-3xl px-4 py-3 text-sm leading-relaxed shadow-sm ${
-                  m.role === "user"
+                  message.role === "user"
                     ? "bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900"
                     : "bg-white text-slate-900 dark:bg-slate-900/70 dark:text-slate-100"
                 }`}
               >
                 <div
                   className={`mb-1 text-[11px] font-bold uppercase tracking-wide ${
-                    m.role === "user"
+                    message.role === "user"
                       ? "text-white/90 dark:text-slate-700"
                       : "text-slate-500 dark:text-slate-400"
                   }`}
                 >
-                  {m.role === "user" ? "Tú" : "Bot"}
+                  {message.role === "user" ? "Tú" : "Bot"}
                 </div>
 
-                <div className="whitespace-pre-line">{m.text}</div>
+                <div className="whitespace-pre-line">{message.text}</div>
 
-                {m.role === "bot" && m.cta ? (
+                {message.role === "bot" && message.cta ? (
                   <a
-                    href={m.cta.href}
-                    className="mt-3 inline-flex text-sm font-semibold text-brand-700 underline underline-offset-4 dark:text-brand-300"
-                    aria-label={m.cta.label}
+                    href={message.cta.href}
+                    className="mt-3 inline-flex text-sm font-semibold text-slate-900 underline underline-offset-4 dark:text-slate-100"
+                    aria-label={message.cta.label}
                     onClick={(e) => {
                       e.preventDefault();
                       handleSchedule(selectedTreatmentId);
-                      document.getElementById("appointments")?.scrollIntoView({ behavior: "smooth" });
+                      document
+                        .getElementById("appointments")
+                        ?.scrollIntoView({ behavior: "smooth" });
                     }}
                   >
-                    {m.cta.label}
+                    {message.cta.label}
                   </a>
                 ) : null}
               </div>
