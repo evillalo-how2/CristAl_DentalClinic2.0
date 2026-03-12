@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import SectionHeader from "../molecule/SectionHeader";
 import Input from "../atoms/Input";
 import Select from "../atoms/Select";
+import Booking from "./Booking";
 
 export default function Appointment({ prefillServiceId = "" }) {
-  const navigate = useNavigate();
-
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -14,6 +12,9 @@ export default function Appointment({ prefillServiceId = "" }) {
     service: "",
     message: "",
   });
+
+  const [showBooking, setShowBooking] = useState(false);
+  const [submittedAppointment, setSubmittedAppointment] = useState(null);
 
   useEffect(() => {
     if (!prefillServiceId) return;
@@ -27,10 +28,14 @@ export default function Appointment({ prefillServiceId = "" }) {
   function onSubmit(e) {
     e.preventDefault();
 
-    navigate("/appointments/summary", {
-      state: {
-        appointment: form,
-      },
+    setSubmittedAppointment(form);
+    setShowBooking(true);
+
+    window.requestAnimationFrame(() => {
+      document.getElementById("booking")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     });
   }
 
@@ -39,17 +44,28 @@ export default function Appointment({ prefillServiceId = "" }) {
       <div className="mx-auto max-w-6xl px-5">
         <SectionHeader
           title="Agenda tu cita"
-          subtitle="Cuéntanos tu motivo de consulta. Te respondemos con la mejor disponibilidad."
+          subtitle="Cuéntanos tu motivo de consulta. Después podrás elegir una fecha y hora disponibles."
         />
 
         <form
           onSubmit={onSubmit}
-          className="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950"
+          className="mt-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-sm"
           aria-label="Formulario para agendar cita"
         >
+        <div className="max-w-3xl">
+        <p className="text-sm font-semibold text-[var(--color-text-soft)]">
+          Paso 1
+        </p>
+       </div>
+
           <fieldset className="m-0 border-0 p-0">
-            <legend className="text-sm font-bold text-slate-900 dark:text-slate-100">
-              Datos de contacto
+            <legend className="text-sm font-bold text-[var(--color-heading)]">
+                      <h3
+          id="booking_title"
+          className="mt-2 text-2xl font-bold text-[var(--color-heading)]"
+        >
+          Llenar el formulario con tu información de contacto
+        </h3>
             </legend>
 
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -100,12 +116,15 @@ export default function Appointment({ prefillServiceId = "" }) {
               </Select>
 
               <div className="sm:col-span-2">
-                <label className="text-sm font-semibold" htmlFor="appt-message">
+                <label
+                  className="text-sm font-semibold text-[var(--color-heading)]"
+                  htmlFor="appt-message"
+                >
                   Cuéntanos qué pasa
                 </label>
                 <textarea
                   id="appt-message"
-                  className="mt-1 min-h-[110px] w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-500"
+                  className="mt-1 min-h-[110px] w-full rounded-xl border border-[var(--color-border)] bg-white px-3 py-2 text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-soft)]"
                   value={form.message}
                   onChange={(e) => updateField("message", e.target.value)}
                   rows={4}
@@ -118,20 +137,24 @@ export default function Appointment({ prefillServiceId = "" }) {
             <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <button
                 type="submit"
-                className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white dark:focus:ring-slate-500 dark:focus:ring-offset-slate-950"
-                aria-label="Enviar solicitud"
+                className="inline-flex items-center justify-center rounded-xl bg-[var(--color-primary)] px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--color-primary-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] focus:ring-offset-2"
+                aria-label="Continuar al calendario"
               >
-                Enviar solicitud
+                Continuar al calendario
               </button>
 
-              <p className="text-xs text-slate-600 dark:text-slate-300">
+              <p className="text-xs text-[var(--color-text-soft)]">
                 <strong>
-                  Al enviar, aceptas que te contactemos para confirmar disponibilidad.
+                  Primero capturamos tus datos y después podrás elegir fecha y hora.
                 </strong>
               </p>
             </div>
           </fieldset>
         </form>
+
+        {showBooking && submittedAppointment ? (
+          <Booking appointment={submittedAppointment} />
+        ) : null}
       </div>
     </section>
   );

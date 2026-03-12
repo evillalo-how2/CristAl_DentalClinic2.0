@@ -29,8 +29,8 @@ export default function TreatmentGrid() {
             />
           ))}
 
-          <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-800 dark:bg-slate-950">
-            <div className="h-52 w-full overflow-hidden bg-slate-100 sm:h-56 dark:bg-slate-900">
+          <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+            <div className="h-52 w-full overflow-hidden bg-[var(--color-card-soft)] sm:h-56">
               <img
                 src={referralCardImage}
                 alt="Dos colegas dentistas revisando un caso clínico para posible referencia con especialista"
@@ -42,17 +42,17 @@ export default function TreatmentGrid() {
 
             <div className="flex flex-1 flex-col p-5">
               <div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+                <h3 className="text-lg font-bold text-[var(--color-heading)]">
                   ¿No encuentras lo que buscas?
                 </h3>
 
-                <p className="mt-2 text-sm leading-7 text-slate-600 dark:text-slate-300">
+                <p className="mt-2 text-sm leading-7 text-[var(--color-text)]">
                   Pregúntanos de todas formas. Si lo que necesitas requiere una
                   especialidad o un enfoque diferente, podemos orientarte o
                   referirte con algún colega de confianza.
                 </p>
 
-                <ul className="mt-4 list-disc space-y-1.5 pl-5 text-sm leading-7 text-slate-700 dark:text-slate-200">
+                <ul className="mt-4 list-disc space-y-1.5 pl-5 text-sm leading-7 text-[var(--color-text)]">
                   <li>Te orientamos según tu caso</li>
                   <li>Valoramos si corresponde a otra especialidad</li>
                   <li>Podemos canalizarte con un colega de confianza</li>
@@ -60,19 +60,17 @@ export default function TreatmentGrid() {
 
                 <dl className="mt-5 grid grid-cols-2 gap-4 text-sm">
                   <div>
-                    <dt className="text-slate-500 dark:text-slate-400">
-                      Atención
-                    </dt>
-                    <dd className="font-semibold text-slate-900 dark:text-white">
+                    <dt className="text-[var(--color-text-soft)]">Atención</dt>
+                    <dd className="font-semibold text-[var(--color-heading)]">
                       Valoración inicial
                     </dd>
                   </div>
 
                   <div>
-                    <dt className="text-slate-500 dark:text-slate-400">
+                    <dt className="text-[var(--color-text-soft)]">
                       Canalización
                     </dt>
-                    <dd className="font-semibold text-slate-900 dark:text-white">
+                    <dd className="font-semibold text-[var(--color-heading)]">
                       Según tu caso
                     </dd>
                   </div>

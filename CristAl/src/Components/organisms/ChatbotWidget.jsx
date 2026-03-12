@@ -173,7 +173,7 @@ export default function ChatbotWidget({ seed, onSchedule }) {
         <button
           type="button"
           onClick={() => setMinimized(false)}
-          className="inline-flex items-center rounded-full bg-slate-900 px-4 py-3 text-sm font-semibold text-white shadow-2xl transition hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100"
+          className="inline-flex items-center rounded-full bg-[var(--color-primary)] px-4 py-3 text-sm font-semibold text-white shadow-2xl transition hover:bg-[var(--color-primary-hover)]"
           aria-label="Abrir chat"
           aria-expanded="false"
         >
@@ -188,14 +188,14 @@ export default function ChatbotWidget({ seed, onSchedule }) {
       <section
         role="dialog"
         aria-label="Chat de tratamientos"
-        className="w-[280px] sm:w-[296px] lg:w-[308px] overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-950"
+        className="w-[280px] overflow-hidden rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-2xl sm:w-[296px] lg:w-[308px]"
       >
         <header className="flex items-start justify-between gap-3 px-4 py-4">
           <div>
-            <p className="text-sm font-extrabold text-slate-900 dark:text-slate-100">
+            <p className="text-sm font-extrabold text-[var(--color-heading)]">
               Asistente dental
             </p>
-            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+            <p className="mt-1 text-xs text-[var(--color-text-soft)]">
               Respuestas guiadas
             </p>
           </div>
@@ -204,7 +204,7 @@ export default function ChatbotWidget({ seed, onSchedule }) {
             <button
               type="button"
               onClick={clearChat}
-              className="rounded-2xl px-3 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900/60"
+              className="rounded-2xl px-3 py-2 text-xs font-semibold text-[var(--color-text)] transition hover:bg-[var(--color-card)]"
               aria-label="Limpiar chat"
             >
               Limpiar
@@ -213,7 +213,7 @@ export default function ChatbotWidget({ seed, onSchedule }) {
             <button
               type="button"
               onClick={() => setMinimized(true)}
-              className="rounded-2xl px-3 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900/60"
+              className="rounded-2xl px-3 py-2 text-xs font-semibold text-[var(--color-text)] transition hover:bg-[var(--color-card)]"
               aria-label="Minimizar chat"
             >
               Minimizar
@@ -221,14 +221,17 @@ export default function ChatbotWidget({ seed, onSchedule }) {
           </div>
         </header>
 
-        <div className="border-y border-slate-200 px-4 py-4 dark:border-slate-800">
-          <label className="text-sm font-semibold" htmlFor="chat-treatment">
+        <div className="border-y border-[var(--color-border)] px-4 py-4">
+          <label
+            className="text-sm font-semibold text-[var(--color-heading)]"
+            htmlFor="chat-treatment"
+          >
             Tratamiento
           </label>
 
           <select
             id="chat-treatment"
-            className="mt-2 h-11 w-full rounded-2xl border border-slate-200 bg-white px-3 text-sm text-slate-900 shadow-sm dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100"
+            className="mt-2 h-11 w-full rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-3 text-sm text-[var(--color-heading)] shadow-sm outline-none transition focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]"
             value={selectedTreatmentId}
             onChange={(e) => setSelectedTreatmentId(e.target.value)}
             aria-label="Seleccionar tratamiento"
@@ -247,7 +250,7 @@ export default function ChatbotWidget({ seed, onSchedule }) {
                 key={topic.id}
                 type="button"
                 onClick={() => ask(topic.id)}
-                className="rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-[11px] font-semibold text-slate-900 shadow-sm transition hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-900/40 dark:text-slate-100 dark:hover:bg-slate-900/70"
+                className="rounded-full border border-[var(--color-border)] bg-[var(--color-card)] px-3 py-2 text-[11px] font-semibold text-[var(--color-heading)] shadow-sm transition hover:bg-[var(--color-accent-light)]"
                 aria-label={topic.label}
               >
                 {topic.label}
@@ -261,28 +264,25 @@ export default function ChatbotWidget({ seed, onSchedule }) {
           role="log"
           aria-live="polite"
           aria-relevant="additions"
-          className="max-h-[260px] space-y-4 overflow-auto bg-slate-50 px-4 py-4 dark:bg-slate-950"
+          className="max-h-[260px] space-y-4 overflow-auto bg-[var(--color-card-soft)] px-4 py-4"
         >
           {messages.map((message, index) => (
             <div
               key={index}
-              className={`flex ${
-                message.role === "user" ? "justify-end" : "justify-start"
-              }`}
+              className={`flex ${message.role === "user" ? "justify-end" : "justify-start"
+                }`}
             >
               <div
-                className={`max-w-[88%] rounded-3xl px-4 py-3 text-sm leading-relaxed shadow-sm ${
-                  message.role === "user"
-                    ? "bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900"
-                    : "bg-white text-slate-900 dark:bg-slate-900/70 dark:text-slate-100"
-                }`}
+                className={`max-w-[88%] rounded-3xl px-4 py-3 text-sm leading-relaxed shadow-sm ${message.role === "user"
+                    ? "bg-[var(--color-primary)] text-white"
+                    : "bg-[var(--color-surface)] text-[var(--color-heading)]"
+                  }`}
               >
                 <div
-                  className={`mb-1 text-[11px] font-bold uppercase tracking-wide ${
-                    message.role === "user"
-                      ? "text-white/90 dark:text-slate-700"
-                      : "text-slate-500 dark:text-slate-400"
-                  }`}
+                  className={`mb-1 text-[11px] font-bold uppercase tracking-wide ${message.role === "user"
+                      ? "text-white/90"
+                      : "text-[var(--color-text-soft)]"
+                    }`}
                 >
                   {message.role === "user" ? "Tú" : "Bot"}
                 </div>
@@ -292,7 +292,7 @@ export default function ChatbotWidget({ seed, onSchedule }) {
                 {message.role === "bot" && message.cta ? (
                   <a
                     href={message.cta.href}
-                    className="mt-3 inline-flex text-sm font-semibold text-slate-900 underline underline-offset-4 dark:text-slate-100"
+                    className="mt-3 inline-flex text-sm font-semibold text-[var(--color-primary)] underline underline-offset-4"
                     aria-label={message.cta.label}
                     onClick={(e) => {
                       e.preventDefault();

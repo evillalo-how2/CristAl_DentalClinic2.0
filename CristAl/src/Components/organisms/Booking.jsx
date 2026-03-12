@@ -133,7 +133,7 @@ export default function Booking({ appointment }) {
         const dates = data.map((item) => item.date);
 
         setHolidayDates(dates);
-      } catch {
+      } catch (error) {
         setHolidayError("No se pudieron cargar los días festivos.");
         setHolidayDates([]);
       } finally {
@@ -185,49 +185,49 @@ export default function Booking({ appointment }) {
   return (
     <section
       id="booking"
-      className="mt-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-sm"
+      className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950"
       aria-labelledby="booking_title"
     >
       <div className="max-w-3xl">
-        <p className="text-sm font-semibold text-[var(--color-text-soft)]">
+        <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">
           Paso 2
         </p>
 
         <h3
           id="booking_title"
-          className="mt-2 text-2xl font-bold text-[var(--color-heading)]"
+          className="mt-2 text-2xl font-bold text-slate-900 dark:text-slate-100"
         >
           Elige fecha y hora para tu cita
         </h3>
 
-        <p className="mt-3 text-sm leading-7 text-[var(--color-text)]">
-          Esta agenda es una simulación visual integrada a tu landing, pero toma
-          en cuenta días festivos mediante una API real.
+        <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">
+          Esta agenda es una simulación visual, pero por ahora
+          toma en cuenta días festivos mediante una API real.
         </p>
 
-        <p className="mt-2 text-xs text-[var(--color-text-soft)]">
-          Se excluyen domingos y, cuando la API responde correctamente, también
-          los festivos oficiales de México.
+        <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
+          Se excluyen domingos y, cuando la API responde también
+          los festivos oficiales de México. En este caso el tercer lunes de marzo.
         </p>
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-5">
+        <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-800 dark:bg-slate-900/40">
           <div>
-            <p className="text-sm font-semibold text-[var(--color-heading)]">
+            <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
               Fechas disponibles
             </p>
 
             {loadingHolidays ? (
-              <p className="mt-1 text-xs text-[var(--color-text-soft)]">
+              <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
                 Cargando días festivos...
               </p>
             ) : holidayError ? (
-              <p className="mt-1 text-xs text-amber-700">
+              <p className="mt-1 text-xs text-amber-600 dark:text-amber-400">
                 {holidayError}
               </p>
             ) : (
-              <p className="mt-1 text-xs text-[var(--color-text-soft)]">
+              <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
                 Domingo no disponible. Días festivos oficiales excluidos.
               </p>
             )}
@@ -248,8 +248,8 @@ export default function Booking({ appointment }) {
                   }}
                   className={`rounded-2xl border px-4 py-3 text-left transition ${
                     isSelected
-                      ? "border-[var(--color-primary)] bg-[var(--color-primary)] text-white"
-                      : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-heading)] hover:border-[var(--color-accent)] hover:bg-[var(--color-card-soft)]"
+                      ? "border-slate-900 bg-slate-900 text-white dark:border-slate-100 dark:bg-slate-100 dark:text-slate-900"
+                      : "border-slate-200 bg-white text-slate-900 hover:border-slate-300 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:hover:bg-slate-900"
                   }`}
                   aria-label={`Seleccionar ${day.longLabel}`}
                 >
@@ -263,7 +263,7 @@ export default function Booking({ appointment }) {
           </div>
 
           <div className="mt-6">
-            <p className="text-sm font-semibold text-[var(--color-heading)]">
+            <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
               Horarios disponibles
             </p>
 
@@ -282,10 +282,10 @@ export default function Booking({ appointment }) {
                     }}
                     className={`rounded-xl border px-4 py-3 text-sm font-semibold transition ${
                       !slot.available
-                        ? "cursor-not-allowed border-[var(--color-border)] bg-[var(--color-card-soft)] text-[var(--color-text-soft)]"
+                        ? "cursor-not-allowed border-slate-200 bg-slate-100 text-slate-400 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-600"
                         : isSelected
-                        ? "border-[var(--color-primary)] bg-[var(--color-primary)] text-white"
-                        : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-heading)] hover:border-[var(--color-accent)] hover:bg-[var(--color-card-soft)]"
+                        ? "border-slate-900 bg-slate-900 text-white dark:border-slate-100 dark:bg-slate-100 dark:text-slate-900"
+                        : "border-slate-200 bg-white text-slate-900 hover:border-slate-300 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:hover:bg-slate-900"
                     }`}
                     aria-label={
                       slot.available
@@ -301,47 +301,47 @@ export default function Booking({ appointment }) {
           </div>
         </div>
 
-        <aside className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-sm">
-          <p className="text-sm font-semibold text-[var(--color-text-soft)]">
+        <aside className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-950">
+          <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">
             Resumen
           </p>
 
-          <h4 className="mt-2 text-xl font-bold text-[var(--color-heading)]">
+          <h4 className="mt-2 text-xl font-bold text-slate-900 dark:text-slate-100">
             Tu solicitud
           </h4>
 
           <dl className="mt-5 space-y-4 text-sm">
             <div>
-              <dt className="text-[var(--color-text-soft)]">Paciente</dt>
-              <dd className="font-semibold text-[var(--color-heading)]">
+              <dt className="text-slate-500 dark:text-slate-400">Paciente</dt>
+              <dd className="font-semibold text-slate-900 dark:text-slate-100">
                 {appointment?.name || "No especificado"}
               </dd>
             </div>
 
             <div>
-              <dt className="text-[var(--color-text-soft)]">Servicio</dt>
-              <dd className="font-semibold text-[var(--color-heading)]">
+              <dt className="text-slate-500 dark:text-slate-400">Servicio</dt>
+              <dd className="font-semibold text-slate-900 dark:text-slate-100">
                 {service.label}
               </dd>
             </div>
 
             <div>
-              <dt className="text-[var(--color-text-soft)]">Duración estimada</dt>
-              <dd className="font-semibold text-[var(--color-heading)]">
+              <dt className="text-slate-500 dark:text-slate-400">Duración estimada</dt>
+              <dd className="font-semibold text-slate-900 dark:text-slate-100">
                 {service.duration}
               </dd>
             </div>
 
             <div>
-              <dt className="text-[var(--color-text-soft)]">Fecha</dt>
-              <dd className="font-semibold text-[var(--color-heading)]">
+              <dt className="text-slate-500 dark:text-slate-400">Fecha</dt>
+              <dd className="font-semibold text-slate-900 dark:text-slate-100">
                 {selectedDay ? selectedDay.longLabel : "Selecciona una fecha"}
               </dd>
             </div>
 
             <div>
-              <dt className="text-[var(--color-text-soft)]">Hora</dt>
-              <dd className="font-semibold text-[var(--color-heading)]">
+              <dt className="text-slate-500 dark:text-slate-400">Hora</dt>
+              <dd className="font-semibold text-slate-900 dark:text-slate-100">
                 {selectedTime || "Selecciona un horario"}
               </dd>
             </div>
@@ -353,8 +353,8 @@ export default function Booking({ appointment }) {
             disabled={!selectedDay || !selectedTime}
             className={`mt-6 inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold transition ${
               !selectedDay || !selectedTime
-                ? "cursor-not-allowed bg-[var(--color-card-soft)] text-[var(--color-text-soft)]"
-                : "bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-hover)]"
+                ? "cursor-not-allowed bg-slate-200 text-slate-500 dark:bg-slate-800 dark:text-slate-500"
+                : "bg-slate-900 text-white hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white"
             }`}
             aria-label="Confirmar horario seleccionado"
           >
@@ -362,31 +362,31 @@ export default function Booking({ appointment }) {
           </button>
 
           {confirmedSlot ? (
-            <div className="mt-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4">
-              <p className="text-sm font-semibold text-[var(--color-heading)]">
+            <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900/50">
+              <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
                 Cita simulada confirmada
               </p>
 
-              <p className="mt-2 text-sm leading-7 text-[var(--color-text)]">
+              <p className="mt-2 text-sm leading-7 text-slate-600 dark:text-slate-300">
                 {confirmedSlot.name}, tu cita de <strong>{confirmedSlot.service}</strong> quedó
                 programada para el <strong>{confirmedSlot.date}</strong> a las{" "}
                 <strong>{confirmedSlot.time}</strong>.
               </p>
 
-              <p className="mt-3 text-xs text-[var(--color-text-soft)]">
+              <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">
                 Esta confirmación es visual y temporal. Más adelante se conectará
                 con backend y agenda real.
               </p>
 
               <div className="mt-4 space-y-2 text-sm">
-                <p className="text-[var(--color-text)]">
+                <p className="text-slate-700 dark:text-slate-300">
                   <strong>Teléfono:</strong> {confirmedSlot.phone}
                 </p>
-                <p className="text-[var(--color-text)]">
+                <p className="text-slate-700 dark:text-slate-300">
                   <strong>Correo:</strong> {confirmedSlot.email}
                 </p>
                 {confirmedSlot.message ? (
-                  <p className="text-[var(--color-text)]">
+                  <p className="text-slate-700 dark:text-slate-300">
                     <strong>Motivo:</strong> {confirmedSlot.message}
                   </p>
                 ) : null}

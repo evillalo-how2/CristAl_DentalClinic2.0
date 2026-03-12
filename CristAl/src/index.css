@@ -1,11 +1,48 @@
 @import "tailwindcss";
 
+:root {
+  --color-bg: #ded6cf;
+  --color-surface: #f5f1ea;
+  --color-card: #ebe4db;
+  --color-border: #d3cbc1;
+
+  --color-accent-soft: #93aaad;
+  --color-accent-muted: #a7b8b8;
+
+  --color-text: #4e4135;
+  --color-text-soft: #84776b;
+  --color-heading: #3f342b;
+
+  --color-primary: #645d55;
+  --color-primary-hover: #4e4135;
+}
+
 @layer base {
   body {
-    @apply m-0 bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100;
+    margin: 0;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   a {
-    @apply text-inherit no-underline;
+    color: inherit;
+    text-decoration: none;
+  }
+    select {
+    background-color: var(--color-surface);
+    color: var(--color-heading);
+    border-radius: 0.75rem;
+  }
+
+  option {
+    background-color: var(--color-surface);
+    color: var(--color-heading);
+  }
+
+  optgroup {
+    background-color: var(--color-surface);
+    color: var(--color-heading);
   }
 }

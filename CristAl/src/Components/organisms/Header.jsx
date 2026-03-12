@@ -28,7 +28,7 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur dark:border-slate-800 dark:bg-slate-950/90">
+    <header className="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-surface)] shadow-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
         <button
           type="button"
@@ -44,7 +44,7 @@ export default function Header() {
             decoding="async"
           />
 
-          <span className="text-lg font-extrabold text-slate-900 dark:text-slate-100">
+          <span className="text-lg font-extrabold text-[var(--color-heading)]">
             Clínica Dental CristAl
           </span>
         </button>
@@ -56,7 +56,7 @@ export default function Header() {
           <button
             type="button"
             onClick={() => goToSection("treatments")}
-            className="text-sm font-semibold text-slate-700 transition hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+            className="text-sm font-semibold text-[var(--color-text)] transition hover:text-[var(--color-heading)]"
             aria-label="Ir a tratamientos"
           >
             Tratamientos
@@ -65,7 +65,7 @@ export default function Header() {
           <button
             type="button"
             onClick={() => goToSection("appointments")}
-            className="inline-flex items-center rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white"
+            className="inline-flex items-center rounded-xl bg-[var(--color-primary)] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[var(--color-primary-hover)]"
             aria-label="Ir a agendar cita"
           >
             Agendar cita

@@ -5,6 +5,12 @@ export default function Footer() {
   const location = useLocation();
 
   function goHome() {
+    if (location.pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    sessionStorage.setItem("pendingScrollTarget", "content");
     navigate("/");
   }
 
@@ -21,7 +27,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="border-t border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">
+    <footer className="border-t border-[var(--color-border)] bg-[var(--color-surface)]">
       <div className="mx-auto max-w-7xl px-5 py-10">
         <div className="grid gap-8 md:grid-cols-2 md:items-start">
           <div>
@@ -31,19 +37,19 @@ export default function Footer() {
               className="text-left"
               aria-label="Volver al inicio"
             >
-              <span className="text-lg font-extrabold text-slate-900 dark:text-slate-100">
+              <span className="text-lg font-extrabold text-[var(--color-heading)]">
                 Clínica Dental CristAl
               </span>
             </button>
 
-            <p className="mt-3 max-w-md text-sm leading-7 text-slate-600 dark:text-slate-300">
+            <p className="mt-3 max-w-md text-sm leading-7 text-[var(--color-text-soft)]">
               Atención dental profesional con enfoque preventivo, comunicación
               clara y acompañamiento en cada etapa de tu tratamiento.
             </p>
           </div>
 
           <div className="md:justify-self-end">
-            <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+            <p className="text-sm font-semibold text-[var(--color-heading)]">
               Navegación
             </p>
 
@@ -54,7 +60,7 @@ export default function Footer() {
               <button
                 type="button"
                 onClick={() => goToSection("treatments")}
-                className="text-left text-sm font-medium text-slate-600 transition hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+                className="text-left text-sm font-medium text-[var(--color-text-soft)] transition hover:text-[var(--color-heading)]"
                 aria-label="Ir a tratamientos"
               >
                 Tratamientos
@@ -63,7 +69,7 @@ export default function Footer() {
               <button
                 type="button"
                 onClick={() => goToSection("appointments")}
-                className="text-left text-sm font-medium text-slate-600 transition hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+                className="text-left text-sm font-medium text-[var(--color-text-soft)] transition hover:text-[var(--color-heading)]"
                 aria-label="Ir a agendar cita"
               >
                 Agendar cita
@@ -72,7 +78,7 @@ export default function Footer() {
               <button
                 type="button"
                 onClick={goHome}
-                className="text-left text-sm font-medium text-slate-600 transition hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+                className="text-left text-sm font-medium text-[var(--color-text-soft)] transition hover:text-[var(--color-heading)]"
                 aria-label="Ir al inicio"
               >
                 Inicio
@@ -81,8 +87,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-slate-200 pt-6 dark:border-slate-800">
-          <p className="text-xs text-slate-500 dark:text-slate-400">
+        <div className="mt-8 border-t border-[var(--color-border)] pt-6">
+          <p className="text-xs text-[var(--color-text-soft)]">
             © 2026 Clínica Dental CristAl. Todos los derechos reservados.
           </p>
         </div>
