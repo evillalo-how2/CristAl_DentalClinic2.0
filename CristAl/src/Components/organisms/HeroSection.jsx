@@ -38,7 +38,7 @@ export default function Hero() {
 
           <div className="mt-7 flex flex-wrap gap-3">
             <a
-              href="#appointments "
+              href="#appointments"
               className="inline-flex items-center justify-center rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700 dark:bg-brand-500 dark:hover:bg-brand-600"
               aria-label="Agendar cita"
             >
