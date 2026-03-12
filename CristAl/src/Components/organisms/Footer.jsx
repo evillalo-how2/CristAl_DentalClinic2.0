@@ -1,31 +1,91 @@
+import { useLocation, useNavigate } from "react-router-dom";
+
 export default function Footer() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  function goHome() {
+    navigate("/");
+  }
+
+  function goToSection(sectionId) {
+    if (location.pathname === "/") {
+      document.getElementById(sectionId)?.scrollIntoView({
+        behavior: "smooth",
+      });
+      return;
+    }
+
+    sessionStorage.setItem("pendingScrollTarget", sectionId);
+    navigate("/");
+  }
+
   return (
-    <footer className="border-t border-slate-200 bg-white py-10 dark:border-slate-800 dark:bg-slate-950">
-      <div className="mx-auto grid max-w-6xl gap-6 px-5 md:grid-cols-2 md:items-center">
-        <div>
-          <p className="text-sm font-extrabold text-slate-900 dark:text-slate-100">Clínica Dental</p>
-          <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-            Atención profesional con enfoque preventivo.
-          </p>
+    <footer className="border-t border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">
+      <div className="mx-auto max-w-7xl px-5 py-10">
+        <div className="grid gap-8 md:grid-cols-2 md:items-start">
+          <div>
+            <button
+              type="button"
+              onClick={goHome}
+              className="text-left"
+              aria-label="Volver al inicio"
+            >
+              <span className="text-lg font-extrabold text-slate-900 dark:text-slate-100">
+                Clínica Dental CristAl
+              </span>
+            </button>
+
+            <p className="mt-3 max-w-md text-sm leading-7 text-slate-600 dark:text-slate-300">
+              Atención dental profesional con enfoque preventivo, comunicación
+              clara y acompañamiento en cada etapa de tu tratamiento.
+            </p>
+          </div>
+
+          <div className="md:justify-self-end">
+            <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+              Navegación
+            </p>
+
+            <nav
+              className="mt-4 flex flex-col gap-3"
+              aria-label="Navegación del pie de página"
+            >
+              <button
+                type="button"
+                onClick={() => goToSection("treatments")}
+                className="text-left text-sm font-medium text-slate-600 transition hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+                aria-label="Ir a tratamientos"
+              >
+                Tratamientos
+              </button>
+
+              <button
+                type="button"
+                onClick={() => goToSection("appointments")}
+                className="text-left text-sm font-medium text-slate-600 transition hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+                aria-label="Ir a agendar cita"
+              >
+                Agendar cita
+              </button>
+
+              <button
+                type="button"
+                onClick={goHome}
+                className="text-left text-sm font-medium text-slate-600 transition hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+                aria-label="Ir al inicio"
+              >
+                Inicio
+              </button>
+            </nav>
+          </div>
         </div>
 
-        <nav className="flex flex-wrap gap-4 md:justify-end" aria-label="Enlaces del pie de página">
-          <a className="text-sm font-semibold text-slate-700 hover:underline dark:text-slate-200" href="#servicios">
-            Servicios
-          </a>
-          <a className="text-sm font-semibold text-slate-700 hover:underline dark:text-slate-200" href="#cita">
-            Agendar cita
-          </a>
-          <a className="text-sm font-semibold text-slate-700 hover:underline dark:text-slate-200" href="#">
-            Privacidad
-          </a>
-        </nav>
-      </div>
-
-      <div className="mx-auto mt-8 max-w-6xl px-5">
-        <p className="text-xs text-slate-500 dark:text-slate-400">
-          © 2026 Clínica Dental CristAl. Todos los derechos reservados.
-        </p>
+        <div className="mt-8 border-t border-slate-200 pt-6 dark:border-slate-800">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            © 2026 Clínica Dental CristAl. Todos los derechos reservados.
+          </p>
+        </div>
       </div>
     </footer>
   );
