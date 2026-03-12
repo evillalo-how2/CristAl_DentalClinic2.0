@@ -68,7 +68,7 @@ const initialMessages = [
 export default function ChatbotWidget({ seed, onSchedule }) {
   const [selectedTreatmentId, setSelectedTreatmentId] = useState("");
   const [messages, setMessages] = useState(initialMessages);
-  const [minimized, setMinimized] = useState(false);
+  const [minimized, setMinimized] = useState(true);
 
   const logRef = useRef(null);
   const lastSeedRef = useRef("");
