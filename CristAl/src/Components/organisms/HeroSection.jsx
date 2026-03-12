@@ -1,3 +1,4 @@
+import { logoImg } from "../../assets/images";
 export default function Hero() {
   return (
     <section aria-labelledby="hero_title" className="py-10">
@@ -83,7 +84,7 @@ export default function Hero() {
         <figure className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-950">
           <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-slate-100 dark:bg-slate-900">
             <img
-              src="/assets/img/blanqueamiento.jpeg"
+              src={logoImg}
               alt="Equipo de blanqueamiento dental"
               className="h-full w-full object-cover"
               loading="eager"

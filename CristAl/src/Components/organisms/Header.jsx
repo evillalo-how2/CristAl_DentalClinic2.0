@@ -1,10 +1,17 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import { logoImg } from "../../assets/images";
 
 export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
 
   function goHome() {
+    if (location.pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    sessionStorage.setItem("pendingScrollTarget", "content");
     navigate("/");
   }
 
@@ -26,9 +33,17 @@ export default function Header() {
         <button
           type="button"
           onClick={goHome}
-          className="text-left"
+          className="flex items-center gap-3 text-left"
           aria-label="Ir al inicio"
         >
+          <img
+            src={logoImg}
+            alt="Logo de Clínica Dental CristAl"
+            className="h-10 w-10 rounded-full object-contain"
+            loading="eager"
+            decoding="async"
+          />
+
           <span className="text-lg font-extrabold text-slate-900 dark:text-slate-100">
             Clínica Dental CristAl
           </span>
